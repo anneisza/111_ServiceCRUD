@@ -23,7 +23,7 @@ const pool = new Pool({
 app.get('/', (req, res) => {
     console.log("TEST DATA :");
 
-    pool.query('SELECT * FROM biodata ORDER BY is')
+    pool.query('SELECT * FROM biodata ORDER BY id')
         .then(result => {
             res.send(result.rows);
         })
@@ -52,7 +52,7 @@ app.put('/biodata/:id', (req, res) => {
     const { nama, nim, kelas } = req.body;
 
     pool.query(
-        'UPDATE biodata SET nama=$1, nim=$2, kelas=$3, WHERE is=$4 RETURNING *',
+        'UPDATE biodata SET nama=$1, nim=$2, kelas=$3 WHERE is=$4 RETURNING *',
         [nama, nim, kelas, id]
     )
         .then(result => {
